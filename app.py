@@ -4,7 +4,7 @@ import random
 import datetime
 from datetime import timedelta
 import sqlite3
-import hashlib  # Added for Security
+import hashlib  
 
 # ---------- DATABASE SETUP ----------
 conn = sqlite3.connect("blood_bank_management_system.db", check_same_thread=False)
