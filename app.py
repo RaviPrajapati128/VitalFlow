@@ -346,29 +346,6 @@ else:
                             if cb2.form_submit_button("Cancel", use_container_width=True):
                                 st.session_state.edit_mode = False
                                 st.rerun()
-           
-            with st.expander("➕ Add New Request"):
-                with st.form("request_form"):
-                    col_a, col_b = st.columns(2)
-                    r_name = col_a.text_input("Full Name")
-                    r_age = col_a.number_input("Age", 18, 65)
-                    r_bg = col_b.selectbox("Blood Group", ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"])
-                    r_city = col_b.selectbox("City",["","Ahmedabad", "Gandhinagar", "Surat", "Rajkot"])
-                    r_contact = col_a.text_input("Contact Number")
-                    r_gender = col_b.radio("Gender", ["Male", "Female", "Other"], horizontal=True)
-                    if st.form_submit_button("Add Request"):
-                        c.execute("INSERT INTO recipients (Name, Age, Gender, BloodGroup, Contact, RequestDate, City) VALUES (?,?,?,?,?,?,?)",
-                                  (r_name, r_age, r_gender, r_bg, r_contact, datetime.date.today(), r_city))
-                        conn.commit()
-                        st.success("Request added successfully!")
-                        st.rerun()   
-
-            with st.expander("🗑️ Remove Request Record"):
-                del_id = st.number_input("Enter Request ID to Delete", min_value=1, key="del_req")
-                if st.button("Delete Request", type="primary"):
-                    if delete_record("recipients", "ID", del_id):
-                        st.success(f"Request ID {del_id} deleted.")
-                        st.rerun()
             st.divider()
         # ... (Rest of your Public Dashboard code) ...
 
